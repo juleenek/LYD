@@ -1,21 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { DisneyCharacter } from '../models/types';
+import { ApiResponse } from '../models/types';
 
-const BASE_URL = 'https://api.disneyapi.dev/';
-
-interface ListResponse<T> {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-  data: T[];
-}
+const BASE_URL = 'https://api.disneyapi.dev';
 
 export const disneyApi = createApi({
   reducerPath: 'disneyApi',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
-    getDisneyCharacters: build.query<ListResponse<DisneyCharacter>, number | void>({
+    getDisneyCharacters: build.query<ApiResponse, number>({
       query: (page = 1) => `character?films&page=${page}`,
     }),
   }),
