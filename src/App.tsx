@@ -15,7 +15,9 @@ const App = () => {
   return (
     <main>
       {characters && characters.data ? (
-        characters.data.map(({ _id, name }) => <div key={_id}>{name}</div>)
+        characters.data.map(({ _id, name, films }) => (
+          <div key={`${_id}-${films[0]}`}>{name} - {films[0]}</div>
+        ))
       ) : (
         <div>No characters found</div>
       )}
