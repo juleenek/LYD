@@ -1,0 +1,18 @@
+@use 'sass:map';
+@import './styles/variables';
+
+body {
+  margin: 0;
+  color: map-get($colors, font-black);
+}
+
+.home {
+  margin: 0;
+  padding: 1em 10em;
+  background-color: map-get($colors, main-background);
+}
+
+.home__wrapper {
+  display: flex;
+  gap: 2em;
+}
