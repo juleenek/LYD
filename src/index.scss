@@ -4,15 +4,26 @@
 body {
   margin: 0;
   color: map-get($colors, font-black);
+  background-color: map-get($colors, main-background);
 }
 
 .home {
   margin: 0;
   padding: 1em 10em;
-  background-color: map-get($colors, main-background);
 }
 
 .home__wrapper {
   display: flex;
   gap: 2em;
+}
+
+.home__loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 200px;
+  }
 }

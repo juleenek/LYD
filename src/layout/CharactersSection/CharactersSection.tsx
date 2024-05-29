@@ -9,7 +9,7 @@ const CharactersSection = () => {
     data: characters,
     error,
     isLoading,
-  } = useGetDisneyCharactersQuery(page);
+  } = useGetDisneyCharactersQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching characters</div>;

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { ApiResponse } from '../../../models/types';
 import CharacterCard from '../../../components/CharacterCard/CharacterCard';
+import './characters-grid.scss';
 
 interface Props {
   characters: ApiResponse | undefined;
@@ -8,7 +9,7 @@ interface Props {
 
 const CharactersGrid: FC<Props> = ({ characters }) => {
   return (
-    <>
+    <div className='characters-grid'>
       {characters && characters.data ? (
         characters.data.map((character) => (
           <CharacterCard character={character} />
@@ -16,7 +17,7 @@ const CharactersGrid: FC<Props> = ({ characters }) => {
       ) : (
         <div>No characters found</div>
       )}
-    </>
+    </div>
   );
 };
 
