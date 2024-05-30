@@ -3,7 +3,9 @@ import { ApiResponse, DisneyCharacter } from '../models/types';
 
 export const BASE_URL = 'https://api.disneyapi.dev';
 
-const characterPerFilm = (rawResult: ApiResponse): ApiResponse => {
+const CHARACTERS_PER_PAGE = 40;
+
+const expandCharactersByFilm = (rawResult: ApiResponse): ApiResponse => {
   const characters: DisneyCharacter[] = [] as DisneyCharacter[];
   rawResult.data.forEach((character) => {
     if (character.films.length > 1) {
@@ -27,11 +29,16 @@ export const disneyApi = createApi({
     getDisneyCharacters: build.query<ApiResponse, void>({
       query: () => `character?films&pageSize=3500`,
       transformResponse: (rawResult: ApiResponse) => {
-        const sortedData = characterPerFilm(rawResult).data.sort((a, b) =>
+        const sortedData = expandCharactersByFilm(rawResult).data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
+        const info = {
+          ...rawResult.info,
+          totalPages: Math.ceil(rawResult.info.count / CHARACTERS_PER_PAGE),
+          count: CHARACTERS_PER_PAGE,
+        };
         return {
-          ...rawResult,
+          info: info,
           data: sortedData,
         };
       },
